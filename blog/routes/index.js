@@ -19,7 +19,7 @@ router.post('/login',function(req,res,next){
 	var name = req.body.name;
 	var password = req.body.password;
 
-	// var hash = crypto.createHash('md5')
+	// var hash = crypto.createHash('md5')  这里暂时不做MD5加密 因为没有注册功能 数据库存储的密码没有加密 无法进行对比
 	// hash.update(password)
 	// password = hash.digest('hex')
 
@@ -38,9 +38,14 @@ router.post('/login',function(req,res,next){
 			res.redirect('/')
 		}
 	}) 
-
 })
 
-
+// md5 加密
+function md5Encrypt(encryptString){
+	var hash = crypto.createHash('md5')
+	hash.update(encryptString,'utf-8') // 防止中文加密前后端不一致的问题
+	encryptString = hash.digest('hex')
+	return encryptString
+}
 
 module.exports = router;

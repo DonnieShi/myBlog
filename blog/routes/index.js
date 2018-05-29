@@ -6,11 +6,16 @@ var mysql = require('./../database')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var query = 'SELECT *FROM article'
+  mysql.query(query,function(err,rows,fields){
+  	var articles = rows;
+  	res.render("index",{articles:articles})
+  })
+
 });
 
 router.get('/login',function(req,res,next){
-	res.render('login')
+	res.render('login',{ message:''})
 });
 
 /* 登录信息验证*/
@@ -36,6 +41,9 @@ router.post('/login',function(req,res,next){
 
 		if (user) {
 			res.redirect('/')
+		}else{
+			res.render('login',{message:'用户名或者密码错误'});
+			return;
 		}
 	}) 
 })

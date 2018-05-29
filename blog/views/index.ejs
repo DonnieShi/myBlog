@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="zh-cn">
+<head>
+	<head>
+		<meta charset="utf-8">
+		<title>撇竖竖个人博客</title>	
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome = 1">
+		<meta name="description" content="撇竖竖的个人博客 不忘初心">
+		<meta name="keywords" content="node,node.js,网站,mysql,node博客">
+		<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">			
+	</head>
+</head>
+
+<body>
+	<header>
+		<h1>撇竖竖个人博客</h1>
+	</header>
+	<section class="main floatfix">
+		<aside>
+			<section class="main-aside-avatar">
+				<img src="../images/avatar.jpg">
+			</section>
+			<ul>
+				<li><a href="">撰写文章</a></li>
+				<li><a href="">关于博客</a></li>
+				<li><a href="">友情链接</a></li>
+				<li><a href="">登出博客</a></li>
+			</ul>
+		</aside>
+		<section class="main-articles">
+			<ul>
+				<% for (var i = 0,max = articles.length;i < max; i++) { %>
+				<li class="main-articles-item">
+					<h2><a href=""><%= articles[i].articleTitle  %></a></h2>
+					<section class="main-articles-items-des">
+						<p>
+							<span>作者:<%= articles[i].articleAuthor  %></span>
+							<span>发布时间:<%= articles[i].articleTime  %></span>
+							<span>浏览量:<%= articles[i].articleClick  %></span>
+						</p>
+					</section>
+				</li>
+				<% } %>
+			</ul>
+		</section>
+	</section>
+	<footer>
+		<p>CreateBy@撇竖竖</p>
+		<p>Powered by Express</p>
+	</footer>
+
+</body>
+
 </html>

@@ -9,6 +9,15 @@ router.get('/', function(req, res, next) {
   var query = 'SELECT *FROM article'
   mysql.query(query,function(err,rows,fields){
   	var articles = rows;
+
+  	// 时间格式处理
+  	articles.forEach(function(ele){
+  		var year = ele.articleTime.getFullYear()
+  		var month = ele.articleTime.getMonth() + 1 > 10 ? ele.articleTime.getMonth() : '0' + (ele.articleTime.getMonth() + 1)
+  		var date = ele.articleTime.getDate() > 10 ? ele.articleTime.getDate() : '0' + ele.articleTime.getDate()
+  		ele.articleTime = year + '-' + month + '-' + date
+  	});
+
   	res.render("index",{articles:articles})
   })
 

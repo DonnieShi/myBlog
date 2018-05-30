@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn" class="login">
-<head>
-	<meta charset="utf-8">
-	<title>撇竖竖的个人博客 </title>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome = 1">
-	<meta name="description" content="撇竖竖的个人博客 不忘初心">
-	<meta name="keywords" content="node,node.js,网站,mysql,node博客">
-	<link rel="stylesheet" type="text/css" href="/css/normalize.css"> 
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-
+	<%- include("./public/head.ejs") %>
 <body>
 	<section>
 		<form action="/login" method="POST">
@@ -28,9 +19,6 @@
 		</form>
 	</section>
 
-	<footer>
-		<p>CreateBy@撇竖竖</p>
-		<p>Powered by Express</p>
-	</footer>
+	<%- include("./public/footer.ejs") %>
 </body>
 </html>

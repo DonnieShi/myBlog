@@ -108,9 +108,9 @@ footer p{
 	cursor:pointer;
 }
 
-.login footer{
+footer{
 	position: absolute;
-	bottom: 100px;
+	bottom: 50px;
 	display: block;
 	width: 100%;
 }
@@ -120,7 +120,7 @@ footer p{
 
 header{
 	height: 135px;
-	background-image: url("../images/banner2.jpg");
+	background-image: url("../images/banner2.png");
 	background-position: center;
 	margin-bottom: 25px;
 	background-repeat: repeat-x;
@@ -157,7 +157,7 @@ aside{
 
 aside ul li {
 	list-style: none;
-	height: 40px;
+	height: 30px;
 	text-align: center;
 }
 
@@ -180,4 +180,53 @@ aside ul li a:hover{
 /*	clear: both; 
 	display: block; */
 	/*margin:auto; */
+}
+
+.main-articles{
+	margin-left:220px;
+}
+
+/*移入文章加一点特效*/
+@keyframes move{
+	0%{transform: translate(0px,0);}
+	100%{transform: translate(50px,0);}
+
+}
+/* Safari 和 Chrome */
+@-webkit-keyframes move 
+{
+	0%{transform: translate(0px,0);}
+	100%{transform: translate(50px,0);}
+}
+
+.main-articles-item:hover{
+	animation:move 1.8s;
+	animation-fill-mode: forwards;
+	/* 填充方式  当动画完成后，保持最后一个属性值*/
+}
+
+
+.main-articles-item{
+	height: 80px;
+	border: 1px solid #c0c0c0;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.main-articles-item:last-child{
+	margin-bottom: 0;
+}
+
+.main-articles-item h2{
+	margin:0;
+	font-weight: normal;
+	/*字体粗细*/
+	font-size: 24px;
+	line-height: 40px;
+}
+
+.main-articles-items-des span{
+	padding-right: 8px;
+	color: :#333;
+	font-size: 14px;
 }

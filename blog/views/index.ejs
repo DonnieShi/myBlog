@@ -12,7 +12,7 @@
 			<ul>
 				<% for (var i = 0,max = articles.length;i < max; i++) { %>
 				<li class="main-articles-item">
-					<h2><a href=""><%= articles[i].articleTitle  %></a></h2>
+					<h2><a href="/articles/<%= articles[i].articleID %>"><%= articles[i].articleTitle  %></a></h2>
 					<section class="main-articles-items-des">
 						<p>
 							<span>作者:<%= articles[i].articleAuthor  %></span>

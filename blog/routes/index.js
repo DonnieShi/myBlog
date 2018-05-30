@@ -4,6 +4,12 @@ var router = express.Router();
 var crypto = require('crypto')
 var mysql = require('./../database')
 
+
+// 登录页 
+router.get('/login',function(req,res,next){
+	res.render('login',{ message:''})
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var query = 'SELECT *FROM article'
@@ -23,9 +29,30 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/login',function(req,res,next){
-	res.render('login',{ message:''})
-});
+// 内容页
+router.get('/articles/:articleID',function(req,res,next){
+	var articleID = req.params.articleID // 存储路由占位符的真实内容 每篇文章的ID作为路由
+	var query = 'SELECT * FROM article WHERE articleID =' + mysql.escape(articleID);
+	mysql.query(query,function(err,rows,fields){
+		if (err) {
+			console.log(err)
+			return
+		}
+		var article = rows[0]
+		var query = "UPDATE article SET articleClick= articleClick + 1 WHERE articleID = " + mysql.escape(articleID)
+		mysql.query(query,function(err,rows,fields){
+			if (err) {
+				console.log(err)
+				return				
+			}
+	  		var year = article.articleTime.getFullYear()
+	  		var month = article.articleTime.getMonth() + 1 > 10 ? article.articleTime.getMonth() : '0' + (article.articleTime.getMonth() + 1)
+	  		var date = article.articleTime.getDate() > 10 ? article.articleTime.getDate() : '0' + article.articleTime.getDate()
+	  		article.articleTime = year + '-' + month + '-' + date
+	  		res.render('article',{article:article})
+		})
+	})
+})
 
 /* 登录信息验证*/
 

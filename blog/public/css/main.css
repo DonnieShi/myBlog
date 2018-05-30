@@ -259,3 +259,45 @@ section.articles{
 	font-size: 16px;
 	line-height: 1.8em;
 }
+
+.edit label,.edit label{
+	width: 10%;
+	text-align: right;
+	display: inline-block;
+}
+
+.edit input,.edit textarea{
+	border: 1px solid #c0c0c0;
+	border-radius: 3px;
+	width: 85%;
+	padding: 6px 5px;
+	margin-left: 20px;
+}
+
+.edit p{
+	text-align: center;
+}
+
+.edit input[type = "submit"]{
+	width: 90px;
+	height: 40px;
+	background: #183D8E;
+	color: #fff;
+	cursor: pointer;
+}
+
+
+.form-group,.text-group{
+	margin-left: 0px;
+}
+
+
+
+.form-group input{
+	height: 24px;
+}
+
+.text-group textarea{
+	height: 350px;
+}
+

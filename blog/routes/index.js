@@ -10,7 +10,7 @@ router.get('/login',function(req,res,next){
 	res.render('login',{ message:''})
 });
 
-/* GET home page. */
+// 首页
 router.get('/', function(req, res, next) {
   var query = 'SELECT *FROM article'
   mysql.query(query,function(err,rows,fields){
@@ -54,8 +54,16 @@ router.get('/articles/:articleID',function(req,res,next){
 	})
 })
 
-/* 登录信息验证*/
+// 发布页
+router.get('/edit',function(req,res,next){
+	res.render('edit')
+})
 
+
+
+
+
+// 登录信息验证
 router.post('/login',function(req,res,next){
 	var name = req.body.name;
 	var password = req.body.password;

@@ -291,8 +291,6 @@ section.articles{
 	margin-left: 0px;
 }
 
-
-
 .form-group input{
 	height: 24px;
 }
@@ -301,3 +299,32 @@ section.articles{
 	height: 350px;
 }
 
+.friends h2{
+	text-align: center;
+}
+
+.friends li{
+	text-align: center;
+	border: 1px solid #c0c0c0;
+	border-radius: 3px;
+	width: 100px;
+	height: 140px;
+	margin: 0 auto;
+	padding: 5px;
+}
+
+.frineds a{
+	text-decoration: none;
+	color: #333;
+}
+
+.friends li a:hover{
+
+	color: #183D8E;
+}
+
+.frineds p{
+	text-align: center;
+	line-height: 1.0em;
+	margin: 0;
+}

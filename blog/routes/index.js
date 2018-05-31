@@ -80,6 +80,13 @@ router.post('/edit',function(req,res,next){
 	})
 })
 
+// 友情链接
+router.get('/friends',function(req,res,next){
+	res.render('friends')
+})
+
+
+
 
 // 登录信息验证
 router.post('/login',function(req,res,next){

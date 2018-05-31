@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var session = require('express-session');
+
 var app = express();
 
 // view engine setup
@@ -17,6 +19,16 @@ app.use(logger('dev'));//使用日志记录中间件
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// 应用session配置
+app.use(session({
+	name:'test',//这里的name值得是cookie的name，默认cookie的name是：connect.sid
+	secret:'123456',//用来对session id相关的cookie进行签名
+	cookie:{maxAge:1000*62*24*30}, // 这么长时间后session 和 cookie 失效过期
+	resave:true,// 是否每次都重新保存会话，建议false          --如果设为false 有时候  req.session 可能为空
+	saveUninitialized:true//// 是否自动保存未初始化的会话，建议false
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));// 设置静态文件夹位置
 
 app.use('/', indexRouter);

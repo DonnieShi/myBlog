@@ -12,7 +12,7 @@ router.get('/login',function(req,res,next){
 
 // 首页
 router.get('/', function(req, res, next) {
-  var query = 'SELECT *FROM article'
+  var query = 'SELECT *FROM article ORDER BY articleID DESC'
   mysql.query(query,function(err,rows,fields){
   	var articles = rows;
 
@@ -56,11 +56,29 @@ router.get('/articles/:articleID',function(req,res,next){
 
 // 发布页
 router.get('/edit',function(req,res,next){
+	var user = req.session.user;
+	if (!user) {
+		res.redirect('/login')
+		return
+	}
 	res.render('edit')
 })
 
 
-
+router.post('/edit',function(req,res,next){
+	var title = req.body.title        // req.body 来自视图的内容
+	var content = req.body.content
+	var author = req.session.user.authorName
+	var query = "INSERT article SET articleTitle = " + mysql.escape(title) + ",articleAuthor = " + mysql.escape(author) + ",articleContent =" +
+	mysql.escape(content) + ",articleTime = CURDATE()";
+	mysql.query(query,function(err,rows,fields){
+		if (err) {
+			console.log(err)
+			return
+		}
+		res.redirect('/');
+	})
+})
 
 
 // 登录信息验证
@@ -84,6 +102,9 @@ router.post('/login',function(req,res,next){
 		var user = rows[0];
 
 		if (user) {
+			req.session.userSign = true
+			req.session.userID = user.authorID
+			req.session.user = user
 			res.redirect('/')
 		}else{
 			res.render('login',{message:'用户名或者密码错误'});

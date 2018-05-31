@@ -85,7 +85,10 @@ router.get('/friends',function(req,res,next){
 	res.render('friends')
 })
 
-
+// 关于博客
+router.get('/about',function(req,res,next){
+	res.render('about')
+})
 
 
 // 登录信息验证

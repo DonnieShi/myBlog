@@ -328,3 +328,12 @@ section.articles{
 	line-height: 1.0em;
 	margin: 0;
 }
+
+.about h2{
+	text-align: center;
+}
+
+.about p{
+	text-align: center;
+	text-align: 2em;
+}

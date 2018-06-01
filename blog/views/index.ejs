@@ -27,6 +27,18 @@
 				</li>
 				<% } %>
 			</ul>
+
+			<% if(pageNum > 1){ %>
+			<section class="page">
+				<% for(var i= 1,max = pageNum;i<= max;i++)  {%>
+					<span <% if(i == page ) {%> class="active" <% }%> >
+						<a href="/?page=<%=i%>">
+							<%= i %>
+						</a>
+					</span>
+				<%}%>
+			</section>
+			<%}%>
 		</section>
 	</section>
 	<%- include("./public/footer.ejs") %>

@@ -12,21 +12,38 @@ router.get('/login',function(req,res,next){
 
 // 首页
 router.get('/', function(req, res, next) {
-  var query = 'SELECT *FROM article ORDER BY articleID DESC'
-  mysql.query(query,function(err,rows,fields){
-  	var articles = rows;
 
-  	// 时间格式处理
-  	articles.forEach(function(ele){
-  		var year = ele.articleTime.getFullYear()
-  		var month = ele.articleTime.getMonth() + 1 > 10 ? ele.articleTime.getMonth() : '0' + (ele.articleTime.getMonth() + 1)
-  		var date = ele.articleTime.getDate() > 10 ? ele.articleTime.getDate() : '0' + ele.articleTime.getDate()
-  		ele.articleTime = year + '-' + month + '-' + date
-  	});
+	var page = req.query.page || 1// 初始化模板中带问号的参数
+	var start = (page -1)*4
+	var findNum = 4
 
-  	res.render("index",{articles:articles,user:req.session.user})
-  })
+	console.log("^^^^^^^^^^^^^^^^^^^^^",start,findNum)
 
+	var queryCount = "SELECT COUNT(*) AS articleNum from article"
+	var queryArticle = "SELECT *FROM article ORDER BY articleID DESC LIMIT " + start + ',' + findNum; // limit 从哪里开始读  读几条
+
+	// var query = 'SELECT *FROM article ORDER BY articleID DESC'
+	mysql.query(queryArticle,function(err,rows,fields){
+		var articles = rows;
+		console.log("###########################",rows)
+		// 时间格式处理		
+		articles.forEach(function(ele){
+			var year = ele.articleTime.getFullYear()
+			var month = ele.articleTime.getMonth() + 1 > 10 ? ele.articleTime.getMonth() : '0' + (ele.articleTime.getMonth() + 1)
+			var date = ele.articleTime.getDate() > 10 ? ele.articleTime.getDate() : '0' + ele.articleTime.getDate()
+			ele.articleTime = year + '-' + month + '-' + date
+		});
+		mysql.query(queryCount,function(err,rows,fields){
+
+
+			var articleNum = rows[0].articleNum
+			var pageNum = Math.ceil(articleNum/4)
+			console.log("************************",pageNum,page)
+
+			res.render("index",{articles:articles,user:req.session.user,page:page,pageNum:pageNum})
+
+		})
+	})
 });
 
 // 内容页

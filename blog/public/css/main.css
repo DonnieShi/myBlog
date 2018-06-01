@@ -347,3 +347,30 @@ span.modify,span.delete a:hover{
 	color: #183D8E;
 }
 
+.page {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.page span{
+	display: inline-block;
+	background: #fff;
+	width: 24px;
+	margin: 0 5px;
+	line-height: 24px;
+	height: 24px;
+}
+
+.page span a{
+	display: block;
+}
+
+.page span.active a{
+	background:#183D8E;
+	color: #fff;
+}
+
+.page span:hover a{
+	background:#183D8E;
+	color: #fff;
+}

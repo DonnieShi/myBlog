@@ -18,6 +18,9 @@
 							<span>作者:<%= articles[i].articleAuthor  %></span>
 							<span>发布时间:<%= articles[i].articleTime  %></span>
 							<span>浏览量:<%= articles[i].articleClick  %></span>
+							<% if(user) {%>
+								<span class="modify"><a href="/modify/<%= articles[i].articleID %>">编辑</a></span>
+							<%}%>
 						</p>
 					</section>
 				</li>

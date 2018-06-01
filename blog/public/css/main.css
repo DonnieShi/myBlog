@@ -337,3 +337,12 @@ section.articles{
 	text-align: center;
 	text-align: 2em;
 }
+
+span.modify {
+	float:right;
+}
+
+
+span.modify a:hover{
+	color: #183D8E;
+}

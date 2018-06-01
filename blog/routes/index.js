@@ -96,6 +96,43 @@ router.get('/logout',function(req,res,next){
 	res.redirect('/')
 })
 
+// 修改
+router.get('/modify/:articleID',function(req,res,next){
+	var articleID = req.params.articleID // 存储路由占位符的真实内容 每篇文章的ID作为路由
+	var query = 'SELECT * FROM article WHERE articleID =' + mysql.escape(articleID);
+	var user = req.session.user
+	if (!user) {
+		res.redirect('/login')
+		return
+	}
+
+	mysql.query(query,function(err,rows,fields){
+		if (err) {
+			console.log(err)
+			return
+		}
+		var article = rows[0]
+		var title = article.articleTitle
+		var content = article.articleContent
+		res.render('modify',{user:user,title:title,content:content})
+	})
+})
+
+router.post('/modify/:articleID',function(req,res,next){   //  app.post  接受客户端提交的请求  第一个参数客户端提交的位置  -- form的action 提交到的目的地 不填表示当前路径
+	var articleID = req.params.articleID
+	var title = req.body.title        // req.body 来自视图的内容
+	var content = req.body.content
+	var author = req.session.user.authorName
+	var query = "UPDATE article SET articleTitle = " + mysql.escape(title) +  ",articleContent =" +
+	mysql.escape(content) +"WHERE articleID = "+ mysql.escape(articleID);
+	mysql.query(query,function(err,rows,fields){
+		if (err) {
+			console.log(err)
+			return
+		}
+		res.redirect('/');
+	})
+})
 
 
 // 登录信息验证

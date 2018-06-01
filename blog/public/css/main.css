@@ -338,11 +338,12 @@ section.articles{
 	text-align: 2em;
 }
 
-span.modify {
+span.modify,span.delete {
 	float:right;
 }
 
 
-span.modify a:hover{
+span.modify,span.delete a:hover{
 	color: #183D8E;
 }
+

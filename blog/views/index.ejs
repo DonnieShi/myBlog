@@ -19,6 +19,7 @@
 							<span>发布时间:<%= articles[i].articleTime  %></span>
 							<span>浏览量:<%= articles[i].articleClick  %></span>
 							<% if(user) {%>
+								<span class="delete"><a href="/<%= articles[i].articleID %>">删除</a></span>							
 								<span class="modify"><a href="/modify/<%= articles[i].articleID %>">编辑</a></span>
 							<%}%>
 						</p>

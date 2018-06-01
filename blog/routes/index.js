@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
   		ele.articleTime = year + '-' + month + '-' + date
   	});
 
-  	res.render("index",{articles:articles})
+  	res.render("index",{articles:articles,user:req.session.user})
   })
 
 });
@@ -49,7 +49,7 @@ router.get('/articles/:articleID',function(req,res,next){
 	  		var month = article.articleTime.getMonth() + 1 > 10 ? article.articleTime.getMonth() : '0' + (article.articleTime.getMonth() + 1)
 	  		var date = article.articleTime.getDate() > 10 ? article.articleTime.getDate() : '0' + article.articleTime.getDate()
 	  		article.articleTime = year + '-' + month + '-' + date
-	  		res.render('article',{article:article})
+	  		res.render('article',{article:article,user:req.session.user})
 		})
 	})
 })
@@ -61,7 +61,7 @@ router.get('/edit',function(req,res,next){
 		res.redirect('/login')
 		return
 	}
-	res.render('edit')
+	res.render('edit',{user:req.session.user})
 })
 
 
@@ -82,13 +82,20 @@ router.post('/edit',function(req,res,next){
 
 // 友情链接
 router.get('/friends',function(req,res,next){
-	res.render('friends')
+	res.render('friends',{user:req.session.user})
 })
 
 // 关于博客
 router.get('/about',function(req,res,next){
-	res.render('about')
+	res.render('about',{user:req.session.user})
 })
+
+// 登出博客
+router.get('/logout',function(req,res,next){
+	req.session.user = null
+	res.redirect('/')
+})
+
 
 
 // 登录信息验证

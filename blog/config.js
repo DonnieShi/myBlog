@@ -1,11 +1,10 @@
 // 数据库相应信息
 const DB ={
-	host:"localhost",
+	host:"47.105.99.97",
 	port:3306,
-	user:"shimao",
-	password:"shimao900705",
+	user:"root",
+	password:"shimao",
 	database:"blog"
 }
 
 module.exports = DB;
-

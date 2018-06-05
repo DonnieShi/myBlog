@@ -17,15 +17,12 @@ router.get('/', function(req, res, next) {
 	var start = (page -1)*4
 	var findNum = 4
 
-	console.log("^^^^^^^^^^^^^^^^^^^^^",start,findNum)
-
 	var queryCount = "SELECT COUNT(*) AS articleNum from article"
 	var queryArticle = "SELECT *FROM article ORDER BY articleID DESC LIMIT " + start + ',' + findNum; // limit 从哪里开始读  读几条
 
 	// var query = 'SELECT *FROM article ORDER BY articleID DESC'
 	mysql.query(queryArticle,function(err,rows,fields){
 		var articles = rows;
-		console.log("###########################",rows)
 		// 时间格式处理		
 		articles.forEach(function(ele){
 			var year = ele.articleTime.getFullYear()
@@ -34,14 +31,9 @@ router.get('/', function(req, res, next) {
 			ele.articleTime = year + '-' + month + '-' + date
 		});
 		mysql.query(queryCount,function(err,rows,fields){
-
-
 			var articleNum = rows[0].articleNum
 			var pageNum = Math.ceil(articleNum/4)
-			console.log("************************",pageNum,page)
-
 			res.render("index",{articles:articles,user:req.session.user,page:page,pageNum:pageNum})
-
 		})
 	})
 });

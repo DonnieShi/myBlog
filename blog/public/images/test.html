@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用 promise 方式实现圆球滚动效果</title>
+	<style type="text/css">
+		ol {
+			margin-bottom: 50px;
+		}
+		li {
+			margin-bottom: 5px;
+		}
+		.box {
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+			margin-top: 10px;
+		}
+		.r {
+			background-color: red;
+		}
+		.b {
+			background-color: blue;
+		}
+		.g {
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<h3>使用 promise 方式实现圆球滚动效果</h3>
+	<ol>
+		<li><code>npm install bluebird</code></li>
+		<li>引入../node_modules/bluebird/js/release/bluebird.js</li>
+	</ol>
+	<div class="box r" id="ball1" style="margin-left: 0px"></div>
+	<div class="box b" id="ball2" style="margin-left: 0px"></div>
+	<div class="box g" id="ball3" style="margin-left: 0px"></div>
+
+	<script src="../node_modules/bluebird/js/release/bluebird.js"></script>
+	<script type="text/javascript">
+		var Promise = window.Promise;
+		var ball1 = document.getElementById("ball1");
+		var ball2 = document.getElementById("ball2");
+		var ball3 = document.getElementById("ball3");
+		function executeAnimate(ball, distance) {
+			return new Promise(function(resolve) {
+				function _animation() {
+					setTimeout(function() {
+						var ml = parseInt(ball.style.marginLeft);
+						if (ml === distance) {
+							resolve();
+						} else {
+							if (ml < distance) {
+								ml++;
+							} else if (ml > distance) {
+								ml--;
+							}
+							ball.style.marginLeft = ml + 'px';
+							_animation(ball, distance);
+						}
+					}, 10);
+				}
+				_animation();
+			});
+		}
+		executeAnimate(ball1, 100)
+			.then(function() {
+				return executeAnimate(ball2, 200);
+			})
+			.then(function() {
+				return executeAnimate(ball3, 300);
+			})
+			.then(function() {
+				return executeAnimate(ball3, 150);
+			})
+			.then(function() {
+				return executeAnimate(ball2, 150);
+			})
+			.then(function() {
+				return executeAnimate(ball1, 150);
+			})
+			.then(function(){
+				document.write('动画执行完毕，3秒后自动刷新页面');
+				setTimeout(function() {
+					window.location.reload();
+				}, 3000);
+			});
+	</script>
+</body>
+</html>
